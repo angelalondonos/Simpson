@@ -1,5 +1,6 @@
 package co.edu.uniquindio.android.electiva.simpson.util;
 
+import android.support.v4.app.Fragment;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -20,9 +21,15 @@ public class AdaptadorDePersonaje extends RecyclerView.Adapter<AdaptadorDePerson
 
 
     private ArrayList<Personaje> personajes;
+    private static OnClickAdaptadorDePersonaje listener;
 
-    public AdaptadorDePersonaje(ArrayList<Personaje> personajes) {
+    public AdaptadorDePersonaje(ArrayList<Personaje> personajes, Fragment fragment) {
         this.personajes = personajes;
+        try{
+            listener= (OnClickAdaptadorDePersonaje) fragment;
+        }catch (ClassCastException e){
+            e.printStackTrace();
+        }
     }
 
     @Override
@@ -32,6 +39,11 @@ public class AdaptadorDePersonaje extends RecyclerView.Adapter<AdaptadorDePerson
             PersonajeViewHolder peliculaVH = new PersonajeViewHolder(itemView);
             return peliculaVH;
 
+
+    }
+
+    public interface OnClickAdaptadorDePersonaje{
+        void onClickPosition(int pos);
     }
 
     @Override
@@ -64,8 +76,11 @@ public class AdaptadorDePersonaje extends RecyclerView.Adapter<AdaptadorDePerson
         @Override
         public void onClick(View view) {
 
+            listener.onClickPosition(getAdapterPosition());
+
             Log.d("TAG", "Element " + getAdapterPosition() + " clicked. "+ txtNombrePresonaje.getText());
         }
+
 
 
     }

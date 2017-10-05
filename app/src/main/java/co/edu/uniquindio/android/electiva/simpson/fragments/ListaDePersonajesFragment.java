@@ -21,7 +21,7 @@ import co.edu.uniquindio.android.electiva.simpson.R;
 import co.edu.uniquindio.android.electiva.simpson.util.AdaptadorDePersonaje;
 import co.edu.uniquindio.android.electiva.simpson.vo.Personaje;
 
-public class ListaDePersonajesFragment extends Fragment {
+public class ListaDePersonajesFragment extends Fragment implements AdaptadorDePersonaje.OnClickAdaptadorDePersonaje {
 
     private RecyclerView listadoDePersonajes;
     private ArrayList<Personaje> personajes;
@@ -31,6 +31,12 @@ public class ListaDePersonajesFragment extends Fragment {
 
     public ListaDePersonajesFragment() {
         // Required empty public constructor
+    }
+
+    @Override
+    public void onClickPosition(int pos) {
+        listener.onPersonajeSeleccionado(pos);
+
     }
 
     /**
@@ -84,7 +90,7 @@ public class ListaDePersonajesFragment extends Fragment {
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
-        adaptador = new AdaptadorDePersonaje(personajes);
+        adaptador = new AdaptadorDePersonaje(personajes, this);
         listadoDePersonajes= (RecyclerView) getView().findViewById(R.id.listaPersonajes);
         listadoDePersonajes.setAdapter(adaptador);
         listadoDePersonajes.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL,false));
@@ -116,6 +122,7 @@ public class ListaDePersonajesFragment extends Fragment {
         return super.onOptionsItemSelected(item);
     }
 
-
-
+    public void setPersonajes(ArrayList<Personaje> personajes) {
+        this.personajes = personajes;
+    }
 }

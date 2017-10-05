@@ -1,5 +1,6 @@
 package co.edu.uniquindio.android.electiva.simpson.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
@@ -8,6 +9,7 @@ import java.util.ArrayList;
 import java.util.Date;
 
 import co.edu.uniquindio.android.electiva.simpson.R;
+import co.edu.uniquindio.android.electiva.simpson.fragments.DetalleDePersonajeFragment;
 import co.edu.uniquindio.android.electiva.simpson.fragments.ListaDePersonajesFragment;
 import co.edu.uniquindio.android.electiva.simpson.vo.Personaje;
 
@@ -32,6 +34,8 @@ public class SimpsonActivity extends AppCompatActivity implements ListaDePersona
         personajes.add(new Personaje("Goku", new Date()));
         personajes.add(new Personaje("Alejandro Magno", new Date()));
 
+        ListaDePersonajesFragment listaDePersonajesFragment = (ListaDePersonajesFragment) getSupportFragmentManager().findFragmentById(R.id.fragmento_lista_personajes);
+        listaDePersonajesFragment.setPersonajes(personajes);
 
     }
 
@@ -49,5 +53,16 @@ public class SimpsonActivity extends AppCompatActivity implements ListaDePersona
     @Override
     public void onPersonajeSeleccionado(int position) {
 
+        boolean esFragmento = getSupportFragmentManager().findFragmentById(R.id.fragmento_detalle_personaje) != null;
+        if (esFragmento) {
+            ((DetalleDePersonajeFragment) getSupportFragmentManager().findFragmentById(R.id.fragmento_detalle_personaje)).mostrarPersonaje(personajes.get(position));
+        } else {
+            Intent i = new Intent(this, DetalleDePersonajeActivity.class);
+            i.putExtra("per", personajes.get(position));
+            startActivity(i);
+        }
+
     }
+
+
 }

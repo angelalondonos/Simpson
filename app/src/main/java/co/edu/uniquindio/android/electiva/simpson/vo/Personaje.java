@@ -1,13 +1,16 @@
 package co.edu.uniquindio.android.electiva.simpson.vo;
 
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import java.util.Date;
 
 /**
  * Created by angela on 26/09/17.
  */
 
-public class Personaje {
+public class Personaje implements Parcelable {
 
     private String id;
     private String nombre;
@@ -21,6 +24,25 @@ public class Personaje {
         this.fecha = fecha;
     }
 
+
+    protected Personaje(Parcel in) {
+        id = in.readString();
+        nombre = in.readString();
+        descripcion = in.readString();
+        urlVideo = in.readString();
+    }
+
+    public static final Creator<Personaje> CREATOR = new Creator<Personaje>() {
+        @Override
+        public Personaje createFromParcel(Parcel in) {
+            return new Personaje(in);
+        }
+
+        @Override
+        public Personaje[] newArray(int size) {
+            return new Personaje[size];
+        }
+    };
 
     public String getId() {
         return id;
@@ -60,5 +82,18 @@ public class Personaje {
 
     public void setUrlVideo(String urlVideo) {
         this.urlVideo = urlVideo;
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel parcel, int i) {
+        parcel.writeString(id);
+        parcel.writeString(nombre);
+        parcel.writeString(descripcion);
+        parcel.writeString(urlVideo);
     }
 }

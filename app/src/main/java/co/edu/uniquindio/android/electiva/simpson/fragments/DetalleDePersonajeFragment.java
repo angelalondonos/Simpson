@@ -15,6 +15,7 @@ import co.edu.uniquindio.android.electiva.simpson.R;
 import co.edu.uniquindio.android.electiva.simpson.vo.Personaje;
 
 /**
+ * Maneja la informaci[on del fragmento del detalle del personaje
  * A simple {@link Fragment} subclass.
  */
 public class DetalleDePersonajeFragment extends Fragment implements View.OnClickListener{
@@ -38,8 +39,7 @@ public class DetalleDePersonajeFragment extends Fragment implements View.OnClick
 
     public void mostrarPersonaje (Personaje personaje) {
         this.personaje = personaje;
-        txtNombre = (TextView)
-                getView().findViewById(R.id.titulo_de_detalle_personaje);
+        txtNombre = (TextView) getView().findViewById(R.id.titulo_de_detalle_personaje);
         txtNombre.setText(personaje.getNombre());
         btnIrVideo = (Button) getView().findViewById(R.id.btn_ir_a_trailes);
         btnIrVideo.setOnClickListener(this);

@@ -6,4 +6,11 @@
     android:layout_height="match_parent"
     tools:context="co.edu.uniquindio.android.electiva.simpson.activity.SimpsonActivity">
 
+    <fragment
+        android:id="@+id/fragmento_lista_personajes"
+        class="co.edu.uniquindio.android.electiva.simpson.fragments.ListaDePersonajesFragment"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+
 </RelativeLayout>
