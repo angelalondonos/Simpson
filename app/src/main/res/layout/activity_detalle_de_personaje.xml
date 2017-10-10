@@ -22,5 +22,4 @@
 
     <include layout="@layout/content_detalle_de_personaje" />
 
-
 </android.support.design.widget.CoordinatorLayout>

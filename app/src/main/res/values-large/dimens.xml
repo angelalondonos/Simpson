@@ -4,4 +4,5 @@
     <dimen name="lista_texto_fecha">13pt</dimen>
     <dimen name="detalle_texto_titulo">14pt</dimen>
     <dimen name="detalle_texto_descripción">11pt</dimen>
+    <dimen name="visualizar_video">12pt</dimen>
 </resources>
