@@ -15,9 +15,9 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import java.util.ArrayList;
-import java.util.Date;
 
 import co.edu.uniquindio.android.electiva.simpson.R;
+import co.edu.uniquindio.android.electiva.simpson.activity.SimpsonActivity;
 import co.edu.uniquindio.android.electiva.simpson.util.AdaptadorDePersonaje;
 import co.edu.uniquindio.android.electiva.simpson.vo.Personaje;
 
@@ -108,8 +108,12 @@ public class ListaDePersonajesFragment extends Fragment implements AdaptadorDePe
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
         if (id == R.id.menu_agregar) {
-            personajes.add(1, new Personaje("Milhouse", new Date()));
-            adaptador.notifyItemInserted(1);
+
+
+
+            ((SimpsonActivity)getActivity()).mostrarDialigoAgregarPersonaje(ListaDePersonajesFragment.class.getName());
+           // personajes.add(1, new Personaje("Milhouse", new Date()));
+           // adaptador.notifyItemInserted(1);
         } else if (id == R.id.menu_eliminar) {
             personajes.remove(1);
             adaptador.notifyItemRemoved(1);

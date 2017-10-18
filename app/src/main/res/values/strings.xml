@@ -19,5 +19,16 @@ nombre o este al completo.</string>
     <string name="title_activity_detalle_de_personaje">DetalleDePersonajeActivity</string>
     <string name="ver_video">Ver video</string>
     <string name="texto_titulo_de_personaje">Medium Text</string>
+    <string name="Agregar_Personaje">Agregar Personaje</string>
+    <string name="nombre_Personaje">Nombre</string>
+
+
+    <string name="nombre_app">Los Simpson </string>
+    <string name="agregar_personaje">Agregar personaje</string>
+    <string name="modificar_posicion">Modificar posición</string>
+    <string name="eliminar_personaje">Eliminar personaje</string>
+    <string name="cambiar_idioma">Cambiar idioma</string>
+    <string name="lenguaje_app">Es</string>
+
 
 </resources>

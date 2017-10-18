@@ -3,12 +3,15 @@ package co.edu.uniquindio.android.electiva.simpson.activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 
 import java.util.ArrayList;
 import java.util.Date;
 
 import co.edu.uniquindio.android.electiva.simpson.R;
+import co.edu.uniquindio.android.electiva.simpson.fragments.AgregarPersonajeFragment;
 import co.edu.uniquindio.android.electiva.simpson.fragments.DetalleDePersonajeFragment;
 import co.edu.uniquindio.android.electiva.simpson.fragments.ListaDePersonajesFragment;
 import co.edu.uniquindio.android.electiva.simpson.vo.Personaje;
@@ -64,5 +67,22 @@ public class SimpsonActivity extends AppCompatActivity implements ListaDePersona
 
     }
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.menu, menu);
+        return true;
+    }
+
+    /**
+     * Permite mostrar dialogo
+     * @param nombreClase
+     */
+    public void mostrarDialigoAgregarPersonaje(String nombreClase) {
+        AgregarPersonajeFragment dialogAgrePersonaje = new AgregarPersonajeFragment();
+        dialogAgrePersonaje.setStyle(dialogAgrePersonaje.STYLE_NORMAL, R.style.DialogoTitulo);
+        dialogAgrePersonaje.show(getSupportFragmentManager(), nombreClase);
+    }
 
 }
