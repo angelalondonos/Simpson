@@ -14,6 +14,7 @@ import co.edu.uniquindio.android.electiva.simpson.R;
 import co.edu.uniquindio.android.electiva.simpson.fragments.AgregarPersonajeFragment;
 import co.edu.uniquindio.android.electiva.simpson.fragments.DetalleDePersonajeFragment;
 import co.edu.uniquindio.android.electiva.simpson.fragments.ListaDePersonajesFragment;
+import co.edu.uniquindio.android.electiva.simpson.util.Utilidades;
 import co.edu.uniquindio.android.electiva.simpson.vo.Personaje;
 
 public class SimpsonActivity extends AppCompatActivity implements ListaDePersonajesFragment.OnPersonajeSeleccionadoListener{
@@ -23,6 +24,7 @@ public class SimpsonActivity extends AppCompatActivity implements ListaDePersona
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Utilidades.obtenerLenguaje(this);
         setContentView(R.layout.activity_simpson);
 
         personajes = new ArrayList();

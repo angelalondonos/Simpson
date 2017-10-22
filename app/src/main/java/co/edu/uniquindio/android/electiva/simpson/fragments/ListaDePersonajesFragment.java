@@ -2,6 +2,7 @@ package co.edu.uniquindio.android.electiva.simpson.fragments;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -19,6 +20,7 @@ import java.util.ArrayList;
 import co.edu.uniquindio.android.electiva.simpson.R;
 import co.edu.uniquindio.android.electiva.simpson.activity.SimpsonActivity;
 import co.edu.uniquindio.android.electiva.simpson.util.AdaptadorDePersonaje;
+import co.edu.uniquindio.android.electiva.simpson.util.Utilidades;
 import co.edu.uniquindio.android.electiva.simpson.vo.Personaje;
 
 public class ListaDePersonajesFragment extends Fragment implements AdaptadorDePersonaje.OnClickAdaptadorDePersonaje {
@@ -122,7 +124,16 @@ public class ListaDePersonajesFragment extends Fragment implements AdaptadorDePe
             personajes.set(1, personajes.get(2));
             personajes.set(2, aux);
             adaptador.notifyItemMoved(1, 2);
+        }else if (id == R.id.menu_cambiar_idioma){
+
+            Utilidades.cambiarIdioma(getContext());
+            Intent intent = getActivity().getIntent();
+            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+            getActivity().finish();
+            startActivity(intent);
         }
+
+
         return super.onOptionsItemSelected(item);
     }
 
