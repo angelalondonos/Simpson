@@ -9,6 +9,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.OnClick;
 import co.edu.uniquindio.android.electiva.simpson.R;
 
 /**
@@ -16,10 +19,10 @@ import co.edu.uniquindio.android.electiva.simpson.R;
  * A simple {@link Fragment} subclass.
  *
  */
-public class AgregarPersonajeFragment extends DialogFragment implements View.OnClickListener {
+public class AgregarPersonajeFragment extends DialogFragment  {
 
 
-    private Button btnAgregar;
+    @BindView(R.id.btn_Registrar) protected Button btnAgregar;
 
     public AgregarPersonajeFragment() {
         // Required empty public constructor
@@ -42,9 +45,8 @@ public class AgregarPersonajeFragment extends DialogFragment implements View.OnC
         getDialog().setTitle(getResources().getString(R.string.Agregar_Personaje));
         View view=inflater.inflate(R.layout.fragment_agregar_personaje, container, false);
 
-        btnAgregar=(Button) view.findViewById(R.id.btn_Registrar);
-        btnAgregar.setOnClickListener(this);
-        return view;
+        ButterKnife.bind(this, view);
+     return view;
     }
 
 
@@ -52,7 +54,7 @@ public class AgregarPersonajeFragment extends DialogFragment implements View.OnC
      * Agregar un nuevo personaje
      * @param view
      */
-    @Override
+    @OnClick(R.id.btn_Registrar)
     public void onClick(View view) {
 
         //Oculta el fragmento
