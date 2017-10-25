@@ -10,6 +10,8 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
 import co.edu.uniquindio.android.electiva.simpson.R;
 import co.edu.uniquindio.android.electiva.simpson.vo.Personaje;
 
@@ -22,6 +24,7 @@ public class AdaptadorDePersonaje extends RecyclerView.Adapter<AdaptadorDePerson
 
     private ArrayList<Personaje> personajes;
     private static OnClickAdaptadorDePersonaje listener;
+
 
     public AdaptadorDePersonaje(ArrayList<Personaje> personajes, Fragment fragment) {
         this.personajes = personajes;
@@ -59,20 +62,28 @@ public class AdaptadorDePersonaje extends RecyclerView.Adapter<AdaptadorDePerson
 
     public static class PersonajeViewHolder extends RecyclerView.ViewHolder implements  View.OnClickListener{
 
-        private TextView txtNombrePresonaje;
-        private TextView txtFechaNacimiento;
+        @BindView(R.id.nombre) protected TextView txtNombrePresonaje;
+        @BindView(R.id.fecha_nacimiento) protected TextView txtFechaNacimiento;
 
         public PersonajeViewHolder(View itemView) {
             super(itemView);
-            txtNombrePresonaje = (TextView) itemView.findViewById(R.id.nombre);
-            txtFechaNacimiento = (TextView) itemView.findViewById(R.id.fecha_nacimiento);
-            itemView.setOnClickListener(this);
+           itemView.setOnClickListener(this);
+            ButterKnife.bind(this, itemView);
         }
+
+        /**
+         * Permite
+         * @param personaje
+         */
         public void binPersonaje(Personaje personaje) {
             txtNombrePresonaje.setText(personaje.getNombre());
             txtFechaNacimiento.setText(personaje.getFecha().toString());
         }
 
+        /**
+         * Evento general de la posicion del adaptador
+         * @param view
+         */
         @Override
         public void onClick(View view) {
 

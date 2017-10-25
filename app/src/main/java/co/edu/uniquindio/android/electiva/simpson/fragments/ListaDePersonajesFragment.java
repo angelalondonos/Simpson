@@ -17,6 +17,9 @@ import android.view.ViewGroup;
 
 import java.util.ArrayList;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.Unbinder;
 import co.edu.uniquindio.android.electiva.simpson.R;
 import co.edu.uniquindio.android.electiva.simpson.activity.SimpsonActivity;
 import co.edu.uniquindio.android.electiva.simpson.util.AdaptadorDePersonaje;
@@ -25,10 +28,11 @@ import co.edu.uniquindio.android.electiva.simpson.vo.Personaje;
 
 public class ListaDePersonajesFragment extends Fragment implements AdaptadorDePersonaje.OnClickAdaptadorDePersonaje {
 
-    private RecyclerView listadoDePersonajes;
+    @BindView(R.id.listaPersonajes) protected RecyclerView listadoDePersonajes;
     private ArrayList<Personaje> personajes;
     private AdaptadorDePersonaje adaptador;
     private OnPersonajeSeleccionadoListener listener;
+    private Unbinder unbider;
 
 
     public ListaDePersonajesFragment() {
@@ -67,6 +71,7 @@ public class ListaDePersonajesFragment extends Fragment implements AdaptadorDePe
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+
         setHasOptionsMenu(true);
     }
 
@@ -80,8 +85,13 @@ public class ListaDePersonajesFragment extends Fragment implements AdaptadorDePe
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+
+        View view=inflater.inflate(R.layout.fragment_lista_de_personajes, container, false);
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_lista_de_personajes, container, false);
+
+       unbider= ButterKnife.bind(this, view); //Inicializa la vista
+
+        return view;
     }
 
     /**
@@ -93,12 +103,15 @@ public class ListaDePersonajesFragment extends Fragment implements AdaptadorDePe
         super.onActivityCreated(savedInstanceState);
 
         adaptador = new AdaptadorDePersonaje(personajes, this);
-        listadoDePersonajes= (RecyclerView) getView().findViewById(R.id.listaPersonajes);
-        listadoDePersonajes.setAdapter(adaptador);
+         listadoDePersonajes.setAdapter(adaptador);
         listadoDePersonajes.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL,false));
         //listadoDePersonajes.setLayoutManager(new GridLayoutManager(this,2)); //parte en 2 la app
+    }
 
-
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        unbider=null;
     }
 
     @Override

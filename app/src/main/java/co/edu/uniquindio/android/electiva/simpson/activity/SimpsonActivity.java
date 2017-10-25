@@ -55,6 +55,11 @@ public class SimpsonActivity extends AppCompatActivity implements ListaDePersona
         return  super.onOptionsItemSelected(item);
     }
 
+
+    /**
+     *
+     * @param position cambiar a personaje
+     */
     @Override
     public void onPersonajeSeleccionado(int position) {
 
