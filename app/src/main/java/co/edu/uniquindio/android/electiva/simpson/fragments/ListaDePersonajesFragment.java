@@ -16,13 +16,14 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import java.util.ArrayList;
+import java.util.Date;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
 import co.edu.uniquindio.android.electiva.simpson.R;
-import co.edu.uniquindio.android.electiva.simpson.activity.SimpsonActivity;
 import co.edu.uniquindio.android.electiva.simpson.util.AdaptadorDePersonaje;
+import co.edu.uniquindio.android.electiva.simpson.util.ManagerFireBase;
 import co.edu.uniquindio.android.electiva.simpson.util.Utilidades;
 import co.edu.uniquindio.android.electiva.simpson.vo.Personaje;
 
@@ -33,6 +34,11 @@ public class ListaDePersonajesFragment extends Fragment implements AdaptadorDePe
     private AdaptadorDePersonaje adaptador;
     private OnPersonajeSeleccionadoListener listener;
     private Unbinder unbider;
+
+    /**
+     * Objeti or medio del cual se realizan todas las operaciones de la BD
+     */
+    private ManagerFireBase managerFireBase;
 
 
     public ListaDePersonajesFragment() {
@@ -91,6 +97,7 @@ public class ListaDePersonajesFragment extends Fragment implements AdaptadorDePe
 
        unbider= ButterKnife.bind(this, view); //Inicializa la vista
 
+
         return view;
     }
 
@@ -101,6 +108,10 @@ public class ListaDePersonajesFragment extends Fragment implements AdaptadorDePe
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
+
+        managerFireBase = ManagerFireBase.instanciar(this);
+
+
 
         adaptador = new AdaptadorDePersonaje(personajes, this);
          listadoDePersonajes.setAdapter(adaptador);
@@ -125,8 +136,9 @@ public class ListaDePersonajesFragment extends Fragment implements AdaptadorDePe
         if (id == R.id.menu_agregar) {
 
 
+            managerFireBase.insertarPersonaje(new Personaje("Homero",new Date(),"Personaje Principal","https://www.youtube.com/watch?v=VqEbCxg2bNI"));
 
-            ((SimpsonActivity)getActivity()).mostrarDialigoAgregarPersonaje(ListaDePersonajesFragment.class.getName());
+           // ((SimpsonActivity)getActivity()).mostrarDialigoAgregarPersonaje(ListaDePersonajesFragment.class.getName());
            // personajes.add(1, new Personaje("Milhouse", new Date()));
            // adaptador.notifyItemInserted(1);
         } else if (id == R.id.menu_eliminar) {

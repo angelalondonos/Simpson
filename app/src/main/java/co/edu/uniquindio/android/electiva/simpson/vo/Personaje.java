@@ -19,12 +19,34 @@ public class Personaje implements Parcelable {
     private String urlVideo;
 
 
+    /**
+     * permite crear un personaje con informacion básica
+     * @param nombre
+     * @param fecha
+     */
     public Personaje(String nombre, Date fecha) {
         this.nombre = nombre;
         this.fecha = fecha;
     }
 
+    /**
+     * Permite crear un persinaje con odos los parametors de la clase
+     * @param nombre
+     * @param fecha
+     * @param descripcion
+     * @param urlVideo
+     */
+    public Personaje(String nombre, Date fecha, String descripcion, String urlVideo) {
+        this.nombre = nombre;
+        this.fecha = fecha;
+        this.descripcion = descripcion;
+        this.urlVideo = urlVideo;
+    }
 
+    /**
+     *
+     * @param in
+     */
     protected Personaje(Parcel in) {
         id = in.readString();
         nombre = in.readString();
