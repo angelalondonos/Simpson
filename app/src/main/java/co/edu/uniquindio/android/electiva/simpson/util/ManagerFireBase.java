@@ -25,10 +25,20 @@ public class ManagerFireBase {
     private DatabaseReference databaseRef; //Refernecia BD
     private static ManagerFireBase instancia;
     private Fragment fragment;
+    private OnActualizarAdaptadorListener listener;
+
+
     private ManagerFireBase(Fragment fragment){
-        database = FirebaseDatabase.getInstance();
-        databaseRef = database.getReference();
-        this.fragment = fragment;
+
+        try{
+            database = FirebaseDatabase.getInstance();
+            databaseRef = database.getReference();
+            this.fragment = fragment;
+            listener= (OnActualizarAdaptadorListener)fragment;
+        }catch (ClassCastException e){
+            Log.e("ManagerFireBase", String.format("Error: El fragmento debe implementar la interfaz", e.getMessage()));
+        }
+
     }
 
 
@@ -49,20 +59,21 @@ public class ManagerFireBase {
 
     public void escucharEventoFireBase(){
 
+        //permite escuchas los eventos de la BD
         databaseRef.addChildEventListener(new ChildEventListener()
 
         {
             @Override
-            public void onChildAdded(DataSnapshot dataSnapshot, String
-                    s) {
+            public void onChildAdded(DataSnapshot dataSnapshot, String s) {
                 Log.v(TAG,"agregado");
-                Personaje personaje =
-                        dataSnapshot.getValue(Personaje.class);
+                Personaje personaje = dataSnapshot.getValue(Personaje.class);
                 personaje.setId(dataSnapshot.getKey());
+
+                listener.actualizarAdaptador(personaje);
+
             }
             @Override
-            public void onChildChanged(DataSnapshot dataSnapshot,
-                                       String s) {
+            public void onChildChanged(DataSnapshot dataSnapshot, String s) {
                 Log.v(TAG,"cambiado");
             }
             @Override
@@ -79,5 +90,12 @@ public class ManagerFireBase {
                 Log.v(TAG,"cancelar");
             }
         });
+    }
+
+    /**
+     * Permite actualizar el adapatador de la lista de peronajes
+     */
+    public interface  OnActualizarAdaptadorListener{
+        public void actualizarAdaptador(Personaje personaje);
     }
 }

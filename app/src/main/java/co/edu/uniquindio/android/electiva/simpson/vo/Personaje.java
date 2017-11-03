@@ -20,6 +20,13 @@ public class Personaje implements Parcelable {
 
 
     /**
+     * Constructor por defecto
+     */
+    public Personaje() {
+
+    }
+
+    /**
      * permite crear un personaje con informacion básica
      * @param nombre
      * @param fecha

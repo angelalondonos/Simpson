@@ -27,7 +27,7 @@ import co.edu.uniquindio.android.electiva.simpson.util.ManagerFireBase;
 import co.edu.uniquindio.android.electiva.simpson.util.Utilidades;
 import co.edu.uniquindio.android.electiva.simpson.vo.Personaje;
 
-public class ListaDePersonajesFragment extends Fragment implements AdaptadorDePersonaje.OnClickAdaptadorDePersonaje {
+public class ListaDePersonajesFragment extends Fragment implements AdaptadorDePersonaje.OnClickAdaptadorDePersonaje, ManagerFireBase.OnActualizarAdaptadorListener {
 
     @BindView(R.id.listaPersonajes) protected RecyclerView listadoDePersonajes;
     private ArrayList<Personaje> personajes;
@@ -50,6 +50,8 @@ public class ListaDePersonajesFragment extends Fragment implements AdaptadorDePe
         listener.onPersonajeSeleccionado(pos);
 
     }
+
+
 
     /**
      * Crea la conexion entre el fragmento y su parte grafica
@@ -109,12 +111,14 @@ public class ListaDePersonajesFragment extends Fragment implements AdaptadorDePe
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
-        managerFireBase = ManagerFireBase.instanciar(this);
+        personajes = new ArrayList<>();
 
+        managerFireBase = ManagerFireBase.instanciar(this);
+        managerFireBase.escucharEventoFireBase();
 
 
         adaptador = new AdaptadorDePersonaje(personajes, this);
-         listadoDePersonajes.setAdapter(adaptador);
+        listadoDePersonajes.setAdapter(adaptador);
         listadoDePersonajes.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL,false));
         //listadoDePersonajes.setLayoutManager(new GridLayoutManager(this,2)); //parte en 2 la app
     }
@@ -165,4 +169,18 @@ public class ListaDePersonajesFragment extends Fragment implements AdaptadorDePe
     public void setPersonajes(ArrayList<Personaje> personajes) {
         this.personajes = personajes;
     }
+
+
+    /**
+     * Agrega y actualiza el nuevo personaje
+     * @param personaje
+     */
+    @Override
+    public void actualizarAdaptador(Personaje personaje) {
+
+        personajes.add(personaje);
+        adaptador.notifyItemInserted(personajes.size()-1);
+    }
+
+
 }
