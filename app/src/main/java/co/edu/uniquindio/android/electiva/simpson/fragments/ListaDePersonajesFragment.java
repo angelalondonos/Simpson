@@ -16,13 +16,13 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import java.util.ArrayList;
-import java.util.Date;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
 import co.edu.uniquindio.android.electiva.simpson.R;
 import co.edu.uniquindio.android.electiva.simpson.util.AdaptadorDePersonaje;
+import co.edu.uniquindio.android.electiva.simpson.util.ConexionSQLite;
 import co.edu.uniquindio.android.electiva.simpson.util.ManagerFireBase;
 import co.edu.uniquindio.android.electiva.simpson.util.Utilidades;
 import co.edu.uniquindio.android.electiva.simpson.vo.Personaje;
@@ -34,6 +34,7 @@ public class ListaDePersonajesFragment extends Fragment implements AdaptadorDePe
     private AdaptadorDePersonaje adaptador;
     private OnPersonajeSeleccionadoListener listener;
     private Unbinder unbider;
+    ConexionSQLite crudsql;
 
     /**
      * Objeti or medio del cual se realizan todas las operaciones de la BD
@@ -113,8 +114,12 @@ public class ListaDePersonajesFragment extends Fragment implements AdaptadorDePe
 
         personajes = new ArrayList<>();
 
-        managerFireBase = ManagerFireBase.instanciar(this);
-        managerFireBase.escucharEventoFireBase();
+        crudsql = new ConexionSQLite(getContext(), 1);
+        personajes = crudsql.getInformacionBD();
+
+
+     //managerFireBase = ManagerFireBase.instanciar(this);
+     //managerFireBase.escucharEventoFireBase();
 
 
         adaptador = new AdaptadorDePersonaje(personajes, this);
@@ -139,8 +144,8 @@ public class ListaDePersonajesFragment extends Fragment implements AdaptadorDePe
         int id = item.getItemId();
         if (id == R.id.menu_agregar) {
 
-
-            managerFireBase.insertarPersonaje(new Personaje("Homero",new Date(),"Personaje Principal","https://www.youtube.com/watch?v=VqEbCxg2bNI"));
+            crudsql.insertarPersonaje( "Juan ", "2013-12-10", "blablavla");
+           //managerFireBase.insertarPersonaje(new Personaje("Homero",new Date(),"Personaje Principal","https://www.youtube.com/watch?v=VqEbCxg2bNI"));
 
            // ((SimpsonActivity)getActivity()).mostrarDialigoAgregarPersonaje(ListaDePersonajesFragment.class.getName());
            // personajes.add(1, new Personaje("Milhouse", new Date()));
@@ -177,10 +182,14 @@ public class ListaDePersonajesFragment extends Fragment implements AdaptadorDePe
      */
     @Override
     public void actualizarAdaptador(Personaje personaje) {
-
+        crudsql.insertarPersonaje( personaje.getNombre(), "2013-12-10", personaje.getDescripcion());
         personajes.add(personaje);
         adaptador.notifyItemInserted(personajes.size()-1);
     }
 
 
+    public void agregarPersonaje(Personaje personaje){
+        personajes.add(personaje);
+        adaptador.notifyItemInserted(personajes.size()-1);
+    }
 }

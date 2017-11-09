@@ -36,6 +36,13 @@ public class Personaje implements Parcelable {
         this.fecha = fecha;
     }
 
+    public Personaje(String id, String nombre, Date fecha, String descripcion) {
+        this.id = id;
+        this.nombre = nombre;
+        this.fecha = fecha;
+        this.descripcion = descripcion;
+    }
+
     /**
      * Permite crear un persinaje con odos los parametors de la clase
      * @param nombre
