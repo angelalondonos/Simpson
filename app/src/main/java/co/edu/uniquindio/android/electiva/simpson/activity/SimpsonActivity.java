@@ -7,6 +7,12 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 
+import com.facebook.CallbackManager;
+import com.facebook.FacebookCallback;
+import com.facebook.FacebookException;
+import com.facebook.login.LoginManager;
+import com.facebook.login.LoginResult;
+
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -27,6 +33,22 @@ public class SimpsonActivity extends AppCompatActivity implements ListaDePersona
         Utilidades.obtenerLenguaje(this);
         setContentView(R.layout.activity_simpson);
 
+        CallbackManager callbackManager = CallbackManager.Factory.create();
+        LoginManager.getInstance().registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
+                    @Override
+                    public void onSuccess(LoginResult loginResult) {
+
+                    }
+                    @Override
+                    public void onCancel() {
+
+                    }
+                    @Override
+                    public void onError(FacebookException exception) {
+
+                    }
+                });
+
         personajes = new ArrayList();
         personajes.add(new Personaje("Ronaldinho", new Date()));
         personajes.add(new Personaje("Albert Einstein", new Date()));
@@ -41,6 +63,8 @@ public class SimpsonActivity extends AppCompatActivity implements ListaDePersona
 
         ListaDePersonajesFragment listaDePersonajesFragment = (ListaDePersonajesFragment) getSupportFragmentManager().findFragmentById(R.id.fragmento_lista_personajes);
         listaDePersonajesFragment.setPersonajes(personajes);
+
+
 
     }
 

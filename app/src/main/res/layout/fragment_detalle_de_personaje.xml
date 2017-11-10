@@ -44,15 +44,28 @@
                 android:text="@string/texto_detalle_de_personaje"
                 android:textSize="@dimen/detalle_texto_descripción" />
 
-            <Button
-                android:id="@+id/btn_ir_a_trailes"
+            <RelativeLayout
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:layout_margin="14dp"
-                android:text="@string/ver_video"
-                android:textSize="@dimen/visualizar_video"
-                />
+                android:layout_height="wrap_content">
+
+                <Button
+                    android:id="@+id/btn_ir_a_trailes"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_alignParentStart="true"
+                    android:text="@string/ver_video"
+                    android:textSize="@dimen/visualizar_video"
+                    />
+                <Button
+                    android:id="@+id/btn_facebook"
+                    android:text="Facebook"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:textSize="@dimen/visualizar_video"/>
+            </RelativeLayout>
+
 
         </LinearLayout>
     </ScrollView>
