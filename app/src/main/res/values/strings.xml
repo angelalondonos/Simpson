@@ -16,6 +16,7 @@ capítulo «Doh-in In the Wind» Homer descubre que su segundo nombre es Jay
 (nombre en inglés de la letra j); de este modo, cuando Homer pronuncia en
 inglés su propio nombre, no se distingue si da la letra inicial del segundo
 nombre o este al completo.</string>
+
     <string name="title_activity_detalle_de_personaje">DetalleDePersonajeActivity</string>
     <string name="ver_video">Ver video</string>
     <string name="texto_titulo_de_personaje">Medium Text</string>
@@ -29,6 +30,11 @@ nombre o este al completo.</string>
     <string name="eliminar_personaje">Eliminar personaje</string>
     <string name="cambiar_idioma">Cambiar idioma</string>
     <string name="lenguaje_app">Es</string>
+
+
     <string name="facebook_app_id">128497241198439</string>
+
+    <string name="com.twitter.sdk.android.CONSUMER_KEY">UY79e2PcsFgK3TTrTdRVjGjTy</string>
+    <string name="com.twitter.sdk.android.CONSUMER_SECRET">EiHkNQOEFVsFTbH8MYDQIdx71ikQum8UbCLXyDyud9ivmTnb3Q</string>
 
 </resources>

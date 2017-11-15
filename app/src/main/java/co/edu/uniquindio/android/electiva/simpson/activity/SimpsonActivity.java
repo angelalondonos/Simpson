@@ -3,6 +3,7 @@ package co.edu.uniquindio.android.electiva.simpson.activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -12,6 +13,10 @@ import com.facebook.FacebookCallback;
 import com.facebook.FacebookException;
 import com.facebook.login.LoginManager;
 import com.facebook.login.LoginResult;
+import com.twitter.sdk.android.core.DefaultLogger;
+import com.twitter.sdk.android.core.Twitter;
+import com.twitter.sdk.android.core.TwitterAuthConfig;
+import com.twitter.sdk.android.core.TwitterConfig;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -32,6 +37,8 @@ public class SimpsonActivity extends AppCompatActivity implements ListaDePersona
         super.onCreate(savedInstanceState);
         Utilidades.obtenerLenguaje(this);
         setContentView(R.layout.activity_simpson);
+
+        inicializarTwitter();
 
         CallbackManager callbackManager = CallbackManager.Factory.create();
         LoginManager.getInstance().registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
@@ -64,10 +71,18 @@ public class SimpsonActivity extends AppCompatActivity implements ListaDePersona
         ListaDePersonajesFragment listaDePersonajesFragment = (ListaDePersonajesFragment) getSupportFragmentManager().findFragmentById(R.id.fragmento_lista_personajes);
         listaDePersonajesFragment.setPersonajes(personajes);
 
-
-
     }
 
+    public void inicializarTwitter(){
+        TwitterConfig config = new TwitterConfig.Builder(this)
+                .logger(new DefaultLogger(Log.DEBUG))
+                .twitterAuthConfig(new
+                        TwitterAuthConfig(getResources().getString(R.string.com_twitter_sdk_android_CONSUMER_KEY),
+                        getResources().getString(R.string.com_twitter_sdk_android_CONSUMER_SECRET)))
+                .debug(true)
+                .build();
+        Twitter.initialize(config);
+    }
 
     /**
      * Permite determinar cual elemento del menu fue seleccionado
